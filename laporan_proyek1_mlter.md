@@ -93,9 +93,12 @@ models.loc['test_accuracy', 'Logistic Regression'] = test_accuracy_lr
 ```
 
 ## Evaluation
-Pada tahap evaluasi, kita akan menilai performa dari kedua model yang terlah dibuat berdasarkan train accuracy dan test_accuracy.
+Pada tahap evaluasi, kita akan menilai performa dari kedua model yang terlah dibuat berdasarkan train accuracy dan test_accuracy. Dari hasil accuracy test, didapatkan bahwa Random Forest memiliki nilai akurasi yang lebih baik dibandingkan Logistic Regression, dimana nilai akurasi terhadap data latihnya sebesar 93% dan nilai akurasi terhadap data uji sebesar 82%.
 
-![Deskripsi Gambar](path/to/image.png)
+Dengan demikian, model menggunakan metode Random Forest memiliki akurasi yang baik untuk memprediksi risiko kehamilan. Dari hasil analisis terhadap serangkaian fitur (faktor kesehatan) yang ada, dapat diketahui bahwa risiko kehamilan paling dipengaruhi oleh angka gula darah dan tekanan darah. Ibu dengan gula darah dan tekanan darah tinggi memiliki risiko kehamilan yang lebih tinggi.
+
+Dengan mengetahui faktor risiko kehamilan dan menggunakan model prediksi di atas, diharapkan penyedia layanan kesehatan dapat mengidentifikasi kehamilan berisiko dengan lebih mudah dan memberikan penanganan terhadap kehamilan berisiko dengan lebih efektif.
+
 
 
 
