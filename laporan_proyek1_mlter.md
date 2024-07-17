@@ -43,6 +43,26 @@ BodyTemp: body temperature in Fahrenheit
 HeartRate: A normal resting heart rate in beats per minute.
 Risk Level: Predicted Risk Intensity Level during pregnancy considering the previous attribute.
 
+### Exploratory Data Analysis
+Beberapa tahapan yang dilakukan dalam Exploratory Data Analysis yaitu:
+1) Menangani outliers dengan metode IQR
+2) Univariate analysis terhadap fitur kategori dan numerik
+Dari analisis terhadap risk level, didapatkan bahwa terdapat 3 kategori pada RiskLevel, yaitu: Low Risk, Mid Risk, dan High Risk. Dari data persentase dapat disimpulkan bahwa lebih dari 50% sampel memiliki risiko kehamilan rendah, dan sekitar 34% memilki risiko kehamilan sedang.
+
+Dari analisis terhadap fitur numerik didapatkan informasi bahwa:
+- Usia ibu hamil paling banyak berusia sekitar 15 hingga 20 tahun.
+- Mayoritas suhu badan berada pada nilai normal yaitu sekitar 98 F atau 36 derajat Celcius.
+- Menurut informasi yang dilansir dari Halodoc, tekanan darah normal berkisar pada 90–120 mmHg (sistolik) dan 60–80 mmHg (diastolik). Berdasarkan plot, sebagian besar sampel memiliki tekanan darah pada rentang normal.
+- Ambang batas atas gula darah normal adalah 11,1 mmol/L. Pada histogram terlihat bahwa sebagian besar sampel memiliki gula darah normal.
+- Mayoritas sampel memilki suhu badan dan heart rate normal.
+
+3) Multivariate analysis menggunakan corrplot
+Correlation matrix menunjukkan:
+- korelasi yang kuat antara fitur SystolicBP dan DiastolicBP.
+- korelasi sedang antara usia dengan tekanan darah, usia dengan gula darah, dan tekanan darah dengan gula darah.
+- variabel yang memiliki korelasi paling tinggi terhadap risiko kehamilan adalah gula darah, yaitu dengan nilai korelasi 0.57 (korelasi sedang).
+- Selain itu, tekanan darah (sistolik dan diastolik) juga berkorelasi sedang dengan risiko kehamilan.
+
 ## Data Preparation
 
 Pada tahap ini dilakukan proses transformasi pada data sehingga menjadi bentuk yang cocok untuk proses pemodelan. Ada beberapa tahapan yang dilakukan yaitu encoding fitur kategori dan pembagian dataset dengan fungsi train_test_split dari library sklearn.
