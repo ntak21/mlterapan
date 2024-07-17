@@ -75,13 +75,19 @@ Dua algoritma yang akan digunakan adalah:
 - Logistic Regression
 
 ### Random Forest
-Algoritma random forest adalah salah satu algoritma supervised learning. Ia dapat digunakan untuk menyelesaikan masalah klasifikasi dan regresi. Random forest juga merupakan algoritma yang sering digunakan karena cukup sederhana tetapi memiliki stabilitas yang baik. 
+Algoritma random forest adalah salah satu algoritma supervised learning. Ia dapat digunakan untuk menyelesaikan masalah klasifikasi dan regresi. Random forest juga merupakan algoritma yang sering digunakan karena cukup sederhana tetapi memiliki stabilitas yang baik.
 
 Pada model ini akan digunakan fungsi RandomForestClassifier dari sklearn.ensemble.
 
+Parameter yang digunakan:
+- n_estimators: Jumlah pohon dalam forest. Pada contoh ini digunakan 100 pohon.
+- max_depth: Kedalaman maksimum setiap pohon. Disetel ke 10 untuk mencegah overfitting.
+- random_state: Untuk memastikan hasil dapat direproduksi, pada model ini digunakan random state 42.
+
+
 ```sh
 # Train and evaluate Random Forest
-rf_model = RandomForestClassifier(n_estimators=100, random_state=42)
+rf_model = RandomForestClassifier(n_estimators=100, max_depth=10, random_state=42)
 rf_model.fit(X_train, y_train)
 ```
 ```sh
@@ -96,9 +102,15 @@ models.loc['test_accuracy', 'RandomForest'] = test_accuracy_rf
 
 ### Logistic Regression
 Logistic Regression adalah metode statistik dan machine learning yang digunakan untuk klasifikasi biner, yaitu memprediksi probabilitas suatu contoh termasuk dalam salah satu dari dua kelas. Pada model ini akan digunakan fungsi LogisticRegression dari sklearn.linear_model.
+
+Parameter yang digunakan:
+- max_iter: Jumlah maksimum iterasi untuk algoritma pengoptimalan konvergen. Pada contoh ini, ditetapkan maksimun iterasi 1000 untuk memastikan konvergensi.
+- random_state: Untuk memastikan hasil yang dapat direproduksi, pada model ini digunakan random state 42.
+- solver: Algoritma yang digunakan untuk optimisasi. Disetel ke 'liblinear', yang sering kali efektif untuk dataset kecil.
+
 ```sh
 # Train and evaluate Logistic Regression
-lr_model = LogisticRegression(max_iter=1000, random_state=42)
+lr_model = LogisticRegression(max_iter=1000, solver='liblinear', random_state=42)
 lr_model.fit(X_train, y_train)
 ```
 
