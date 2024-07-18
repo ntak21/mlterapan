@@ -162,7 +162,7 @@ Pada evaluasi model, kita menggunakan metrik akurasi sebagai berikut:
 ![image](https://github.com/user-attachments/assets/f6a98f40-a66d-4096-a766-c6275bfb1a16)
 
 
-Dari hasil accuracy test, didapatkan bahwa Random Forest memiliki nilai akurasi yang lebih baik dibandingkan Logistic Regression, dimana nilai akurasi terhadap data latihnya sebesar 93% dan nilai akurasi terhadap data uji sebesar 82%.
+Dari hasil accuracy test, didapatkan bahwa Random Forest memiliki nilai akurasi yang lebih baik dibandingkan Logistic Regression, dimana nilai akurasi terhadap data latihnya sebesar 90% dan nilai akurasi terhadap data uji sebesar 82%.
 
 Dengan demikian, model menggunakan metode Random Forest memiliki akurasi yang baik untuk memprediksi risiko kehamilan. Dari hasil analisis terhadap serangkaian fitur (faktor kesehatan) yang ada, dapat diketahui bahwa risiko kehamilan paling dipengaruhi oleh angka gula darah dan tekanan darah. Ibu dengan gula darah dan tekanan darah tinggi memiliki risiko kehamilan yang lebih tinggi.
 
