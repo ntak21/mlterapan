@@ -159,7 +159,7 @@ Pada evaluasi model, kita menggunakan metrik akurasi sebagai berikut:
 
 - Test Accuracy: Akurasi model pada data uji, yang menunjukkan seberapa baik model memprediksi kelas target pada data yang tidak digunakan untuk melatih model. Ini memberikan indikasi kemampuan generalisasi model terhadap data baru.
 
-![Accuracy](https://github.com/ntak21/mlterapan/blob/main/accuracy.png)
+![image](https://github.com/user-attachments/assets/f6a98f40-a66d-4096-a766-c6275bfb1a16)
 
 
 Dari hasil accuracy test, didapatkan bahwa Random Forest memiliki nilai akurasi yang lebih baik dibandingkan Logistic Regression, dimana nilai akurasi terhadap data latihnya sebesar 93% dan nilai akurasi terhadap data uji sebesar 82%.
