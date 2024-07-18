@@ -2,9 +2,9 @@
 
 ## Domain Proyek
 
-Maternal Health merupakan aspek penting dari kesehatan masyarakat, dengan angka kematian dan morbiditas ibu menjadi indikator utama kualitas sistem kesehatan global. Komplikasi terkait kehamilan dapat menimbulkan risiko signifikan bagi ibu dan janin, yang berpotensi mengakibatkan masalah kesehatan yang serius atau bahkan kematian. Untuk mengurangi risiko tersebut, diperlukan upaya pencegahan salah satunya dengan memprediksi tingkat risiko komplikasi. Hal ini memungkinkan penyedia layanan kesehatan untuk memprioritaskan dan mengelola kehamilan berisiko tinggi dengan lebih efektif serta memastikan layanan kesehatan yang lebih baik.
+Maternal Health merupakan aspek penting dari kesehatan masyarakat, dengan angka kematian dan morbiditas ibu menjadi indikator utama kualitas sistem kesehatan global. Pentingnya pemantauan kesehatan maternal telah banyak dibahas dalam literatur medis, salah satunya oleh WHO, yang menekankan perlunya pemantauan kesehatan maternal yang komprehensif untuk mengurangi angka kematian ibu (WHO, 2019).
 
-Pentingnya pemantauan kesehatan maternal telah banyak dibahas dalam literatur medis, salah satunya oleh WHO yang menekankan perlunya pemantauan kesehatan maternal yang komprehensif untuk mengurangi angka kematian ibu (WHO, 2019).
+Komplikasi terkait kehamilan dapat menimbulkan risiko signifikan bagi ibu dan janin, yang berpotensi mengakibatkan masalah kesehatan yang serius atau bahkan kematian. Untuk mengurangi risiko tersebut, diperlukan upaya pencegahan yang efektif. Salah satu pendekatan penting adalah memprediksi tingkat risiko komplikasi kehamilan. Dengan memprediksi risiko ini, penyedia layanan kesehatan dapat memprioritaskan dan mengelola kehamilan berisiko tinggi dengan lebih efektif, serta memastikan layanan kesehatan yang lebih baik.
 
 Referensi: World Health Organization: WHO. (2024, April 26). Maternal mortality. https://www.who.int/news-room/fact-sheets/detail/maternal-mortality
 
@@ -35,18 +35,20 @@ sumber: https://www.kaggle.com/datasets/csafrit2/maternal-health-risk-data/data
 - RiskLevel merupakan fitur target
 
 ### Deskripsi Variabel 
-Age: Age in years when a woman is pregnant.
-SystolicBP: Upper value of Blood Pressure in mmHg, another significant attribute during pregnancy.
-DiastolicBP: Lower value of Blood Pressure in mmHg, another significant attribute during pregnancy.
-BS: Blood glucose levels is in terms of a molar concentration, mmol/L.
-BodyTemp: body temperature in Fahrenheit
-HeartRate: A normal resting heart rate in beats per minute.
-Risk Level: Predicted Risk Intensity Level during pregnancy considering the previous attribute.
+##Deskripsi Variabel
+
+- Age: usia dalam tahun pada saat ibu hamil
+- SystolicBP: tekanan darah saat jantung berkontraksi (sistole) (mmHg)
+- DiastolicBP:  tekanan darah saat jantung berelaksasi (diastole) (mmHg)
+- BS: Kadar glukosa darah dalam konsentrasi molar, mmol/L.
+- BodyTemp: suhu badan dalam fahrenheit
+- HeartRate: detak jantung saat istirahat normal dalam bit per menit
+- Risk Level: tingkat intensitas risiko kehamilan yang diprediksi (low risk, mid risk, high risk)
 
 ### Exploratory Data Analysis
 Beberapa tahapan yang dilakukan dalam Exploratory Data Analysis yaitu:
 1) Menangani outliers dengan metode IQR
-2) Univariate analysis terhadap fitur kategori dan numerik
+3) Univariate analysis terhadap fitur kategori dan numerik
 Dari analisis terhadap risk level, didapatkan bahwa terdapat 3 kategori pada RiskLevel, yaitu: Low Risk, Mid Risk, dan High Risk. Dari data persentase dapat disimpulkan bahwa lebih dari 50% sampel memiliki risiko kehamilan rendah, dan sekitar 34% memilki risiko kehamilan sedang.
 
 Dari analisis terhadap fitur numerik didapatkan informasi bahwa:
@@ -65,7 +67,9 @@ Correlation matrix menunjukkan:
 
 ## Data Preparation
 
-Pada tahap ini dilakukan proses transformasi pada data sehingga menjadi bentuk yang cocok untuk proses pemodelan. Ada beberapa tahapan yang dilakukan yaitu encoding fitur kategori dan pembagian dataset dengan fungsi train_test_split dari library sklearn.
+Pada tahap ini dilakukan proses transformasi pada data sehingga menjadi bentuk yang cocok untuk proses pemodelan. Ada beberapa tahapan yang dilakukan yaitu:
+- encoding fitur kategori
+- pembagian dataset dengan fungsi train_test_split dari library sklearn
 
 ## Modelling
 Pada tahap ini, akan dikembangkan model machine learning dengan dua algoritma. Kemudian, akan dievaluasi performa masing-masing algoritma berdasarkan akurasinya untuk menjawab problem statement dari tahap business understanding.
