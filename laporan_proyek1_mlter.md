@@ -20,9 +20,8 @@ Berdasarkan kondisi yang telah diuraikan sebelumnya, akan dikembangkan sebuah si
 - Membuat model machine learning yang dapat memprediksi risiko kesehatan maternal seakurat mungkin berdasarkan fitur-fitur yang ada.
 
 ### Solution Statement
-Risiko kesehatan dengan kategori tingkatan tertentu termasuk ke dalam permasalahan klasifikasi. Oleh karena itu, metodologi pada proyek ini adalah membangun model klasifikasi dengan Risk Level sebagai target. Pengembangan model akan menggunakan dua algoritma machine learning yaitu Random Forest dan Logistic Regression. Dari kedua model akan dipilih satu model dengan akurasi terbaik.
-Metrik evaluasi yang akan digunakan pada kasus ini adalah accuracy score menggunakan sklearn.metrics.
-
+Untuk mengetahui fitur yang paling berpengaruh terhadap risiko kesehatan maternal akan dilakukan analisis korelasi antar fitur numerik dengan fitur target (risk level) menggunakan correlation matrix.  
+Risiko kesehatan dengan kategori tingkatan tertentu termasuk ke dalam permasalahan klasifikasi. Oleh karena itu, metodologi pada proyek ini adalah membangun model klasifikasi dengan Risk Level sebagai target. Pengembangan model akan menggunakan dua algoritma machine learning yaitu Random Forest dan Logistic Regression. Dari kedua model akan dipilih satu model dengan akurasi terbaik. Metrik evaluasi yang akan digunakan pada kasus ini adalah accuracy score menggunakan sklearn.metrics.
 ## Data Understanding
 Dataset yang digunakan adalah Maternal Health Risk Data yang diambil dari situs Kaggle. Data pada dataset ini didapatkan dari berbagai rumah sakit, klinik komunitas, pusat kesehatan maternal melalui sistem pemantauan risiko berbasis IoT.
 
@@ -33,6 +32,9 @@ sumber: https://www.kaggle.com/datasets/csafrit2/maternal-health-risk-data/data
 - Fitur numerik: Age, SystolicBP, DiastolicBP, BS, BodyTemp, dan HeartRate
 - Fitur non numerik: RiskLevel
 - RiskLevel merupakan fitur target
+
+![image](https://github.com/user-attachments/assets/b290b0a1-eb50-4b47-b21e-deded2487fc6)
+
 
 ### Deskripsi Variabel 
 ##Deskripsi Variabel
@@ -47,9 +49,22 @@ sumber: https://www.kaggle.com/datasets/csafrit2/maternal-health-risk-data/data
 
 ### Exploratory Data Analysis
 Beberapa tahapan yang dilakukan dalam Exploratory Data Analysis yaitu:
-1) Menangani outliers dengan metode IQR
-3) Univariate analysis terhadap fitur kategori dan numerik
+1) Menangani Missing Value
+2) Menangani outliers dengan metode IQR
+Outliers adalah nilai-nilai ekstrem yang dapat mempengaruhi hasil analisis dan pemodelan. Metode Interquartile Range (IQR) digunakan untuk mendeteksi dan menangani outliers. IQR adalah rentang antara kuartil pertama (Q1) dan kuartil ketiga (Q3) dari distribusi data. Nilai yang berada di bawah (Q1 - 1.5 * IQR) atau di atas (Q3 + 1.5 * IQR) dianggap sebagai outliers. Dengan menghapus outliers, kita dapat mengurangi pengaruh negatif mereka pada model.
+
+![image](https://github.com/user-attachments/assets/28070f66-bed7-42f4-9e26-38d690977767)
+
+Dari visualisasi boxplot terhadap fitur-fitur di atas, terlihat bahwa data 'Age', 'SystolicBP', 'BS', 'BodyTemp', dan 'HeartRate' memiliki outliers. Namun apabila dilihat pada deskripsi data, fitur BodyTemp memiliki rentang yang normal, yaitu 98 hingga 103 Fahrenheit sehingga suhu badan pada sekitar nilai maksimum tidak dapat dianggap sebagai outliers. Begitu pula dengan Blood Sugar dengan nilai hingga 19 mmol/L yang masih mungkin, meskipun mengindikasikan seseorang memiliki gula darah sangat tinggi (hiperglikemia).
+
+Sehingga outliers yang perlu dihilangkan pada data adalah HeartRate.
+
+4) Univariate analysis terhadap fitur kategori dan numerik
+
+![image](https://github.com/user-attachments/assets/13b9e4cc-7b20-432c-913c-6b41aac77f28)
+
 Dari analisis terhadap risk level, didapatkan bahwa terdapat 3 kategori pada RiskLevel, yaitu: Low Risk, Mid Risk, dan High Risk. Dari data persentase dapat disimpulkan bahwa lebih dari 50% sampel memiliki risiko kehamilan rendah, dan sekitar 34% memilki risiko kehamilan sedang.
+![image](https://github.com/user-attachments/assets/723d13ae-fa9f-4f81-8c36-a879919e5bbd)
 
 Dari analisis terhadap fitur numerik didapatkan informasi bahwa:
 - Usia ibu hamil paling banyak berusia sekitar 15 hingga 20 tahun.
@@ -58,7 +73,9 @@ Dari analisis terhadap fitur numerik didapatkan informasi bahwa:
 - Ambang batas atas gula darah normal adalah 11,1 mmol/L. Pada histogram terlihat bahwa sebagian besar sampel memiliki gula darah normal.
 - Mayoritas sampel memilki suhu badan dan heart rate normal.
 
-3) Multivariate analysis menggunakan corrplot
+4) Multivariate analysis menggunakan corrplot
+   ![image](https://github.com/user-attachments/assets/780d6d14-492f-472e-bc2f-de4660c7b880)
+
 Correlation matrix menunjukkan:
 - korelasi yang kuat antara fitur SystolicBP dan DiastolicBP.
 - korelasi sedang antara usia dengan tekanan darah, usia dengan gula darah, dan tekanan darah dengan gula darah.
@@ -69,7 +86,12 @@ Correlation matrix menunjukkan:
 
 Pada tahap ini dilakukan proses transformasi pada data sehingga menjadi bentuk yang cocok untuk proses pemodelan. Ada beberapa tahapan yang dilakukan yaitu:
 - encoding fitur kategori
+  
+Sebelum membangun model machine learning, kita perlu mengubah variabel categorical menjadi format numerik. Selain itu, encoding fitur kategori RiskLevel juga diperlukan untuk menganalisis korelasi antara Risk Level dengan variabel numerik lainnya.
+Untuk itu dilakukan encoding untuk RiskLevel menggunakan 'OrdinalEncoder' dari skicit-learn.
+
 - pembagian dataset dengan fungsi train_test_split dari library sklearn
+Pada kasus ini, kita akan menggunakan proporsi pembagian data latih dan data uji sebesar 80:20 dengan fungsi train_test_split dari skicit-learn.
 
 ## Modelling
 Pada tahap ini, akan dikembangkan model machine learning dengan dua algoritma. Kemudian, akan dievaluasi performa masing-masing algoritma berdasarkan akurasinya untuk menjawab problem statement dari tahap business understanding.
@@ -129,11 +151,15 @@ models.loc['test_accuracy', 'Logistic Regression'] = test_accuracy_lr
 ```
 
 ## Evaluation
-Pada tahap evaluasi, kita akan menilai performa dari kedua model yang terlah dibuat berdasarkan train accuracy dan test_accuracy. 
+Pada tahap evaluasi, kita akan menilai performa dari kedua model yang telah dibuat berdasarkan metrik akurasi pada data latih (train accuracy) dan data uji (test accuracy). Akurasi adalah metrik yang mengukur proporsi prediksi yang benar dibandingkan dengan keseluruhan prediksi. Ini memberikan gambaran umum tentang seberapa baik model memprediksi kelas target.
 
+Pada evaluasi model, kita menggunakan metrik akurasi sebagai berikut:
 
-![Accuracy](https://github.com/ntak21/mlterapan/raw/main/accuracy.png)
+- Train Accuracy: Akurasi model pada data latih, yang menunjukkan seberapa baik model memprediksi kelas target pada data yang digunakan untuk melatih model.
 
+- Test Accuracy: Akurasi model pada data uji, yang menunjukkan seberapa baik model memprediksi kelas target pada data yang tidak digunakan untuk melatih model. Ini memberikan indikasi kemampuan generalisasi model terhadap data baru.
+
+![Accuracy](https://github.com/ntak21/mlterapan/blob/main/accuracy.png)
 
 
 Dari hasil accuracy test, didapatkan bahwa Random Forest memiliki nilai akurasi yang lebih baik dibandingkan Logistic Regression, dimana nilai akurasi terhadap data latihnya sebesar 93% dan nilai akurasi terhadap data uji sebesar 82%.
