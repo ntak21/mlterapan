@@ -15,18 +15,18 @@ Referensi: [How Netflix’s Recommendations System Works](https://help.netflix.c
   
   Berdasarkan kondisi yang telah diuraikan sebelumnya, akan dikembangkan sebuah sistem rekomendasi film untuk menjawab permasalahan berikut.
 
- - Bagaimana cara membuat sistem rekomendasi film berdasarkan data riwayat film yang ditonton oleh pengguna itu sendiri?
- - Bagaimana membuat sistem rekomendasi film berdasarkan data pengguna lain yang memiliki minat serupa?
+  - Bagaimana cara membuat sistem rekomendasi film berdasarkan data riwayat preferensi pengguna itu sendiri?
+  - Bagaimana membuat sistem rekomendasi film berdasarkan rating dan data pengguna lain yang memiliki minat serupa?
 
 - **Goals**
-  - Membuat sistem rekomendasi film berdasarkan data riwayat preferensi dan rating film yang diberikan oleh pengguna itu sendiri.
-  - Membuat sistem rekomendasi film berdasarkan data pengguna lain yang memiliki minat serupa.
+  - Membuat sistem rekomendasi film berdasarkan data riwayat preferensi pengguna itu sendiri?
+  - Membuat sistem rekomendasi film berdasarkan rating dan data pengguna lain yang memiliki minat serupa?
 
 - **Solution Statement**
 
-  Untuk membuat sistem rekomendasi film berdasarkan data riwayat preferensi dan rating film yang diberikan oleh pengguna itu sendiri, akan digunakan metode Content Based Filtering. Algoritma Content Based Filtering akan mempelajari minat pengguna dan menyarankan item serupa yang pernah disukai di masa lalu atau sedang dilihat di masa kini.
-  
-  Untuk membuat sistem rekomendasi film berdasarkan berdasarkan data pengguna lain yang memiliki minat serupa, akan digunakan metode Collaborative Filtering. Collaborative Filtering merupakan metode yang mengandalkan data pengguna lain yang memiliki minat/preferensi serupa dengan melakukan pencarian pola kesamaan dan perbedaan dalam pilihan film untuk memberikan rekomendasi yang relevan.
+  Untuk membuat sistem rekomendasi film berdasarkan data riwayat preferensi diberikan oleh pengguna itu sendiri, akan digunakan metode Content Based Filtering. Algoritma Content Based Filtering akan mempelajari minat pengguna dan menyarankan item serupa yang pernah disukai di masa lalu atau sedang dilihat di masa kini.
+
+  Untuk membuat sistem rekomendasi film berdasarkan berdasarkan rating dan data pengguna lain yang memiliki minat serupa, akan digunakan metode Collaborative Filtering. Collaborative Filtering merupakan metode yang mengandalkan data pengguna lain yang memiliki minat/preferensi serupa dengan melakukan pencarian pola kesamaan dan perbedaan dalam pilihan film untuk memberikan rekomendasi yang relevan.
 
   Metrik evaluasi yang akan digunakan untuk menganalisis performa model adalah RMSE dan MAE.
 
