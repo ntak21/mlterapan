@@ -88,7 +88,7 @@ Untuk menangani nilai yang hilang dalam dataset:
 - Kolom imdbId dan tmdbId: Baris dengan nilai null pada kolom-kolom ini dihapus karena informasi ID ini penting untuk identifikasi film di platform eksternal.
 - Kolom tag: Nilai null di kolom tag diisi dengan string kosong untuk menghindari kehilangan informasi tentang tag yang mungkin tidak ada.
 
-## Ekstraksi Fitur menggunakan TF-IDF
+### Ekstraksi Fitur menggunakan TF-IDF
 
 TF-IDF (Term Frequency-Inverse Document Frequency) adalah teknik yang digunakan untuk mengubah teks menjadi representasi numerik yang dapat digunakan dalam model pembelajaran mesin. Tujuan utamanya adalah untuk menilai seberapa penting sebuah kata dalam dokumen relatif terhadap seluruh koleksi dokumen.
 
