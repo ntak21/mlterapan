@@ -64,15 +64,6 @@ dataset: https://grouplens.org/datasets/movielens/latest/
   - 'movieId' : Nomor unik yang merupakan identifikasi untuk masing-masing film dalam dataset.
   - 'tag' : Kata kunci atau tag yang diberikan oleh pengguna untuk suatu film.
 
- ### Menggabungkan tabel
-Pada tahap ini, tabel-tabel dari dataset digabungkan untuk menghasilkan sebuah dataframe terintegrasi. Tabel movies dan links digabungkan untuk menyertakan ID IMDb dan TMDb bersama dengan detail film lainnya. Selanjutnya, tabel ratings dan tags digabungkan untuk mengaitkan penilaian pengguna dengan tag yang mereka berikan. Akhirnya, semua data ini digabungkan menjadi satu dataframe komprehensif yang mencakup semua informasi relevan untuk analisis lebih lanjut.
-
-### Menangani Missing Value
-Untuk menangani nilai yang hilang dalam dataset:
-- Kolom genres: Nilai null di kolom ini diisi dengan string 'Unknown' untuk memastikan setiap film memiliki genre yang terdefinisi.
-- Kolom imdbId dan tmdbId: Baris dengan nilai null pada kolom-kolom ini dihapus karena informasi ID ini penting untuk identifikasi film di platform eksternal.
-- Kolom tag: Nilai null di kolom tag diisi dengan string kosong untuk menghindari kehilangan informasi tentang tag yang mungkin tidak ada.
-
  ### Exploratory Data Analysis
 - Univariate Analysis
   Analisis univariat dilakukan untuk mengeksplorasi distribusi rating film:
@@ -87,6 +78,22 @@ Untuk menangani nilai yang hilang dalam dataset:
   - Jumlah Film Berdasarkan Genre: Barplot ini menunjukkan berapa banyak film yang terdapat dalam setiap genre. Dari plot ini, kita dapat melihat bahwa genre Drama dan Komedi adalah yang paling umum dalam dataset.
 
 ## Data Preparation
+
+### Menggabungkan tabel
+Pada tahap ini, tabel-tabel dari dataset digabungkan untuk menghasilkan sebuah dataframe terintegrasi. Tabel movies dan links digabungkan untuk menyertakan ID IMDb dan TMDb bersama dengan detail film lainnya. Selanjutnya, tabel ratings dan tags digabungkan untuk mengaitkan penilaian pengguna dengan tag yang mereka berikan. Akhirnya, semua data ini digabungkan menjadi satu dataframe komprehensif yang mencakup semua informasi relevan untuk analisis lebih lanjut.
+
+### Menangani Missing Value
+Untuk menangani nilai yang hilang dalam dataset:
+- Kolom genres: Nilai null di kolom ini diisi dengan string 'Unknown' untuk memastikan setiap film memiliki genre yang terdefinisi.
+- Kolom imdbId dan tmdbId: Baris dengan nilai null pada kolom-kolom ini dihapus karena informasi ID ini penting untuk identifikasi film di platform eksternal.
+- Kolom tag: Nilai null di kolom tag diisi dengan string kosong untuk menghindari kehilangan informasi tentang tag yang mungkin tidak ada.
+
+## Ekstraksi Fitur menggunakan TF-IDF
+
+TF-IDF (Term Frequency-Inverse Document Frequency) adalah teknik yang digunakan untuk mengubah teks menjadi representasi numerik yang dapat digunakan dalam model pembelajaran mesin. Tujuan utamanya adalah untuk menilai seberapa penting sebuah kata dalam dokumen relatif terhadap seluruh koleksi dokumen.
+
+Untuk model content-based filtering yang akan digunakan berikutnya, TF-IDF berfungsi merepresentasikan konten item (film) berdasarkan fitur teks seperti genre. 
+
 ###  Train Test Split
 Train-test split adalah langkah penting dalam proses pengembangan model yang membagi dataset menjadi dua subset: satu untuk melatih model (train set) dan satu untuk menguji model (test set). Pada kasus ini, kita akan menggunakan proporsi pembagian data latih dan data uji sebesar 80:20 dengan fungsi train_test_split dari sklearn.
 
