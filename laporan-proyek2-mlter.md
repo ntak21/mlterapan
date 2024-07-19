@@ -15,12 +15,12 @@ Referensi: [How Netflix’s Recommendations System Works](https://help.netflix.c
   
   Berdasarkan kondisi yang telah diuraikan sebelumnya, akan dikembangkan sebuah sistem rekomendasi film untuk menjawab permasalahan berikut.
 
- - Bagaimana cara membuat sistem rekomendasi film berdasarkan data riwayat preferensi dan rating film yang diberikan oleh pengguna itu sendiri?
+ - Bagaimana cara membuat sistem rekomendasi film berdasarkan data riwayat film yang ditonton oleh pengguna itu sendiri?
  - Bagaimana membuat sistem rekomendasi film berdasarkan data pengguna lain yang memiliki minat serupa?
 
 - **Goals**
   - Membuat sistem rekomendasi film berdasarkan data riwayat preferensi dan rating film yang diberikan oleh pengguna itu sendiri.
-  - Mmembuat sistem rekomendasi film berdasarkan data pengguna lain yang memiliki minat serupa.
+  - Membuat sistem rekomendasi film berdasarkan data pengguna lain yang memiliki minat serupa.
 
 - **Solution Statement**
 
@@ -45,14 +45,19 @@ dataset: https://grouplens.org/datasets/movielens/latest/
   - movieId' : Nomor unik yang merupakan identifikasi untuk masing-masing film dalam dataset.
   - 'title' : Judul dari film yang bersangkutan.
   - 'genres' : Genre-genre yang diwakili oleh film tersebut. Satu film bisa memiliki beberapa genre yang dipisahkan oleh karakter '|'.
+
+
 - "links.csv" memiliki attribut:
   - 'movieId' : Nomor unik yang merupakan identifikasi untuk masing-masing film dalam dataset.
   - 'imdbId' : Nomor unik yang merupakan identifikasi untuk masing-masing film pada IMDb (Internet Movie Database).
   - 'tmdbId' : Nomor unik yang merupakan identifikasi untuk masing-masing film pada TMDb (The Movie Database).
+
+
 - "ratings.csv" memiliki attribut:
   - 'userId' : Nomor unik yang merupakan identifikasi untuk masing-masing pengguna dalam dataset.
   - 'movieId' : Nomor unik yang merupakan identifikasi untuk masing-masing film dalam dataset.
   - 'rating' : Penilaian yang diberikan oleh pengguna untuk suatu film. Nilai rating berkisar antara 0.5 hingga 5.0 dalam interval 0.5.
+
 
 - "tags.csv" memiliki attribut:
   - 'userId' : Nomor unik yang merupakan identifikasi untuk masing-masing pengguna dalam dataset.
@@ -71,10 +76,15 @@ Untuk menangani nilai yang hilang dalam dataset:
  ### Exploratory Data Analysis
 - Univariate Analysis
   Analisis univariat dilakukan untuk mengeksplorasi distribusi rating film:
-  -   Distribusi Rating: Histogram rating menunjukkan sebaran penilaian film yang   diberikan oleh pengguna. Plot ini menggambarkan jumlah film pada setiap tingkat rating dan memberikan wawasan tentang preferensi rating umum di dataset.
+  ![image](https://github.com/user-attachments/assets/727b7a62-dc15-4d8c-83d9-942ad788b017)
+  - Distribusi Rating: Histogram ini memvisualisasikan jumlah rating yang diterima pada setiap tingkat rating. Rating berkisar dari 0.5 hingga 5.0, biasanya dalam interval 0.5.
+  - Distribusi Rating Terbanyak: Rating yang paling sering diberikan oleh pengguna adalah 4.0. Hal ini menunjukkan kecenderungan pengguna untuk memberikan rating yang positif, menandakan kepuasan umum terhadap film yang mereka tonton.
+ 
+    
 - Multivariate Analysis
   Analisis multivariat dilakukan untuk memahami hubungan antara variabel:
-  -   Jumlah Film Berdasarkan Genre: Barplot menunjukkan jumlah film dalam setiap genre yang terdaftar di dataset. Ini memberikan gambaran tentang genre mana yang paling umum dan membantu dalam memahami preferensi genre secara keseluruhan.
+  ![image](https://github.com/user-attachments/assets/bc4b6281-f5ab-4082-8ed6-70689bb703eb)
+  - Jumlah Film Berdasarkan Genre: Barplot ini menunjukkan berapa banyak film yang terdapat dalam setiap genre. Dari plot ini, kita dapat melihat bahwa genre Drama dan Komedi adalah yang paling umum dalam dataset.
 
 ## Data Preparation
 ###  Train Test Split
@@ -87,6 +97,40 @@ Dua algoritma yang akan digunakan adalah:
 - Content Based Filtering
 - Collaborative Filtering
 
-### 
+### Content Based Filtering
+Content-Based Filtering adalah teknik dalam sistem rekomendasi yang memanfaatkan fitur atau atribut dari item untuk memberikan rekomendasi. Dalam konteks rekomendasi film, metode ini menggunakan deskripsi atau atribut film—seperti genre, aktor—untuk menemukan film yang mirip dengan film yang telah disukai pengguna sebelumnya.
 
+Beberapa parameter yang digunakan:
+- title: Judul film yang dijadikan acuan untuk mendapatkan rekomendasi.
+- cosine_sim: Matriks kesamaan cosine antara film yang digunakan untuk mencari film yang paling mirip.
+- idx: Indeks film yang relevan berdasarkan judul.
+- sim_scores: Daftar tuple yang berisi indeks film dan skor kesamaan. Diurutkan - berdasarkan skor kesamaan untuk mendapatkan film yang paling mirip.
+- movie_indices: Daftar indeks film yang paling mirip untuk rekomendasi.
+- movies.iloc[movie_indices]: Mengambil detail film yang relevan berdasarkan indeks.
+  
+### Collaborative Filtering
+Collaborative Filtering adalah metode dalam sistem rekomendasi yang memanfaatkan preferensi dan perilaku pengguna lain untuk memberikan rekomendasi. Berbeda dengan content-based filtering, yang fokus pada atribut item, collaborative filtering berfokus pada interaksi antara pengguna dan item. 
+
+Dalam konteks film, collaborative filtering dapat dilakukan dengan dua pendekatan utama:
+- User-Based Collaborative Filtering: Mencari pengguna yang memiliki selera yang sama dengan pengguna target dan merekomendasikan film yang disukai oleh pengguna serupa.
+- Item-Based Collaborative Filtering: Mencari film yang mirip dengan film yang disukai pengguna dan merekomendasikan film serupa berdasarkan kesamaan dengan film yang telah dinilai atau ditonton oleh pengguna.
+  
+Pada kasus ini jenis collaborative filtering yang digunakan adalah Item-Based Collaborative Filtering dengan memanfaatkan algoritma SVD. 
+
+Singular Value Decomposition (SVD) adalah teknik dekomposisi matriks yang digunakan dalam collaborative filtering untuk menemukan pola laten antara pengguna dan item. SVD memecah matriks pengguna-item menjadi tiga matriks: matriks pengguna, matriks item, dan matriks diagonal dari nilai singular, sehingga membantu mengidentifikasi hubungan tersembunyi di antara mereka.. 
+
+Beberapa parameter yang digunakan:
+- rating_scale=(0.5, 5.0): Menentukan skala rating dalam dataset. Dalam hal ini, rating berkisar dari 0.5 hingga 5.0.
+- load_from_df: Mengonversi DataFrame ke dalam format yang dapat digunakan oleh scikit-surprise. Data harus memuat ID pengguna, ID film, dan rating.
+- SVD(): SVD atau Singular Value Decomposition merupakan algoritma rekomendasi yang populer dalam collaborative filtering. SVD membagi matriks rating pengguna-item menjadi beberapa matriks yang lebih kecil untuk memprediksi rating yang hilang.
+  
 ## Evaluation
+Pada tahap evaluasi digunakan parameter RMSE dan MAE untuk menganalisis performa model.
+- RMSE (Root Mean Squared Error): Mengukur kesalahan rata-rata kuadrat prediksi model. RMSE memberikan penekanan lebih besar pada kesalahan yang lebih besar dan lebih sensitif terhadap outlier.
+- MAE (Mean Absolute Error): Mengukur kesalahan rata-rata absolut dari prediksi model. MAE memberikan gambaran umum tentang seberapa akurat model dalam hal kesalahan rata-rata
+
+![image](https://github.com/user-attachments/assets/f51457cc-529e-41f8-ae00-f606fcd7177c)
+
+
+Berdasarkan hasil evaluasi model, Collaborative Filtering menunjukkan performa yang lebih baik dibandingkan dengan Content-Based Filtering berdasarkan kedua metrik evaluasi, yaitu RMSE dan MAE. Model Collaborative Filtering memiliki kesalahan prediksi yang lebih kecil, baik dalam hal kuadrat kesalahan (RMSE) maupun rata-rata kesalahan absolut (MAE). Hal ini mengindikasikan bahwa Collaborative Filtering lebih akurat dalam memberikan rekomendasi film yang sesuai dengan preferensi pengguna.
+
