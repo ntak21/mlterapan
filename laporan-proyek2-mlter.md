@@ -60,16 +60,33 @@ dataset: https://grouplens.org/datasets/movielens/latest/
   - 'tag' : Kata kunci atau tag yang diberikan oleh pengguna untuk suatu film.
 
  ### Menggabungkan tabel
+Pada tahap ini, tabel-tabel dari dataset digabungkan untuk menghasilkan sebuah dataframe terintegrasi. Tabel movies dan links digabungkan untuk menyertakan ID IMDb dan TMDb bersama dengan detail film lainnya. Selanjutnya, tabel ratings dan tags digabungkan untuk mengaitkan penilaian pengguna dengan tag yang mereka berikan. Akhirnya, semua data ini digabungkan menjadi satu dataframe komprehensif yang mencakup semua informasi relevan untuk analisis lebih lanjut.
 
- 
+### Menangani Missing Value
+Untuk menangani nilai yang hilang dalam dataset:
+- Kolom genres: Nilai null di kolom ini diisi dengan string 'Unknown' untuk memastikan setiap film memiliki genre yang terdefinisi.
+- Kolom imdbId dan tmdbId: Baris dengan nilai null pada kolom-kolom ini dihapus karena informasi ID ini penting untuk identifikasi film di platform eksternal.
+- Kolom tag: Nilai null di kolom tag diisi dengan string kosong untuk menghindari kehilangan informasi tentang tag yang mungkin tidak ada.
 
  ### Exploratory Data Analysis
-
+- Univariate Analysis
+  Analisis univariat dilakukan untuk mengeksplorasi distribusi rating film:
+  -   Distribusi Rating: Histogram rating menunjukkan sebaran penilaian film yang   diberikan oleh pengguna. Plot ini menggambarkan jumlah film pada setiap tingkat rating dan memberikan wawasan tentang preferensi rating umum di dataset.
+- Multivariate Analysis
+  Analisis multivariat dilakukan untuk memahami hubungan antara variabel:
+  -   Jumlah Film Berdasarkan Genre: Barplot menunjukkan jumlah film dalam setiap genre yang terdaftar di dataset. Ini memberikan gambaran tentang genre mana yang paling umum dan membantu dalam memahami preferensi genre secara keseluruhan.
 
 ## Data Preparation
-
+###  Train Test Split
+Train-test split adalah langkah penting dalam proses pengembangan model yang membagi dataset menjadi dua subset: satu untuk melatih model (train set) dan satu untuk menguji model (test set). Pada kasus ini, kita akan menggunakan proporsi pembagian data latih dan data uji sebesar 80:20 dengan fungsi train_test_split dari sklearn.
 
 ## Modeling
+Pada tahap ini, akan dikembangkan model machine learning dengan dua algoritma. Kemudian, akan dievaluasi performa masing-masing algoritma berdasarkan akurasinya untuk menjawab problem statement dari tahap business understanding.
 
+Dua algoritma yang akan digunakan adalah:
+- Content Based Filtering
+- Collaborative Filtering
+
+### 
 
 ## Evaluation
