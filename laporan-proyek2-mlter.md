@@ -107,6 +107,10 @@ Beberapa parameter yang digunakan:
 - sim_scores: Daftar tuple yang berisi indeks film dan skor kesamaan. Diurutkan - berdasarkan skor kesamaan untuk mendapatkan film yang paling mirip.
 - movie_indices: Daftar indeks film yang paling mirip untuk rekomendasi.
 - movies.iloc[movie_indices]: Mengambil detail film yang relevan berdasarkan indeks.
+
+Hasil Top 10 Recommendation:
+![image](https://github.com/user-attachments/assets/fdb979b9-1df6-4b45-8b82-d24a50d5a705)
+
   
 ### Collaborative Filtering
 Collaborative Filtering adalah metode dalam sistem rekomendasi yang memanfaatkan preferensi dan perilaku pengguna lain untuk memberikan rekomendasi. Berbeda dengan content-based filtering, yang fokus pada atribut item, collaborative filtering berfokus pada interaksi antara pengguna dan item. 
@@ -123,6 +127,11 @@ Beberapa parameter yang digunakan:
 - rating_scale=(0.5, 5.0): Menentukan skala rating dalam dataset. Dalam hal ini, rating berkisar dari 0.5 hingga 5.0.
 - load_from_df: Mengonversi DataFrame ke dalam format yang dapat digunakan oleh scikit-surprise. Data harus memuat ID pengguna, ID film, dan rating.
 - SVD(): SVD atau Singular Value Decomposition merupakan algoritma rekomendasi yang populer dalam collaborative filtering. SVD membagi matriks rating pengguna-item menjadi beberapa matriks yang lebih kecil untuk memprediksi rating yang hilang.
+
+Hasil Top 10 Recommendations:
+![image](https://github.com/user-attachments/assets/8b98d3fd-a3ec-4878-8061-f7e35b6129a5)
+
+
   
 ## Evaluation
 Pada tahap evaluasi digunakan parameter RMSE dan MAE untuk menganalisis performa model.
