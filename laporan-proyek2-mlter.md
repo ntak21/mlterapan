@@ -11,14 +11,59 @@ Referensi: [How Netflix’s Recommendations System Works](https://help.netflix.c
 
 ## Business Understanding
 
-### Problem Statements
+- **Problem statement**
+  
+  Berdasarkan kondisi yang telah diuraikan sebelumnya, akan dikembangkan sebuah sistem rekomendasi film untuk menjawab permasalahan berikut.
 
-### Goals
+ - Bagaimana cara membuat sistem rekomendasi film berdasarkan data riwayat preferensi dan rating film yang diberikan oleh pengguna itu sendiri?
+ - Bagaimana membuat sistem rekomendasi film berdasarkan data pengguna lain yang memiliki minat serupa?
 
-### Solution statements
+- **Goals**
+  - Membuat sistem rekomendasi film berdasarkan data riwayat preferensi dan rating film yang diberikan oleh pengguna itu sendiri.
+  - Mmembuat sistem rekomendasi film berdasarkan data pengguna lain yang memiliki minat serupa.
 
+- **Solution Statement**
+
+  Untuk membuat sistem rekomendasi film berdasarkan data riwayat preferensi dan rating film yang diberikan oleh pengguna itu sendiri, akan digunakan metode Content Based Filtering. Algoritma Content Based Filtering akan mempelajari minat pengguna dan menyarankan item serupa yang pernah disukai di masa lalu atau sedang dilihat di masa kini.
+  
+  Untuk membuat sistem rekomendasi film berdasarkan berdasarkan data pengguna lain yang memiliki minat serupa, akan digunakan metode Collaborative Filtering. Collaborative Filtering merupakan metode yang mengandalkan data pengguna lain yang memiliki minat/preferensi serupa dengan melakukan pencarian pola kesamaan dan perbedaan dalam pilihan film untuk memberikan rekomendasi yang relevan.
+
+  Metrik evaluasi yang akan digunakan untuk menganalisis performa model adalah RMSE dan MAE.
 
 ## Data Understanding
+
+Dataset yang digunakan mendeskripsikan aktivitas pemberian rating bintang 5 dan penandaan teks bebas dari MovieLens, sebuah layanan rekomendasi film.
+
+- Dataset ini berisi 100836 rating dan 3683 tag untuk 9742 film.
+- Dataset terbagi ke dalam file movies.csv, links.csv, ratings.csv, dan tags.csv.
+
+dataset: https://grouplens.org/datasets/movielens/latest/
+
+### Deskripsi Variabel
+
+- "movies.csv" memilki attribut:
+  - movieId' : Nomor unik yang merupakan identifikasi untuk masing-masing film dalam dataset.
+  - 'title' : Judul dari film yang bersangkutan.
+  - 'genres' : Genre-genre yang diwakili oleh film tersebut. Satu film bisa memiliki beberapa genre yang dipisahkan oleh karakter '|'.
+- "links.csv" memiliki attribut:
+  - 'movieId' : Nomor unik yang merupakan identifikasi untuk masing-masing film dalam dataset.
+  - 'imdbId' : Nomor unik yang merupakan identifikasi untuk masing-masing film pada IMDb (Internet Movie Database).
+  - 'tmdbId' : Nomor unik yang merupakan identifikasi untuk masing-masing film pada TMDb (The Movie Database).
+- "ratings.csv" memiliki attribut:
+  - 'userId' : Nomor unik yang merupakan identifikasi untuk masing-masing pengguna dalam dataset.
+  - 'movieId' : Nomor unik yang merupakan identifikasi untuk masing-masing film dalam dataset.
+  - 'rating' : Penilaian yang diberikan oleh pengguna untuk suatu film. Nilai rating berkisar antara 0.5 hingga 5.0 dalam interval 0.5.
+
+- "tags.csv" memiliki attribut:
+  - 'userId' : Nomor unik yang merupakan identifikasi untuk masing-masing pengguna dalam dataset.
+  - 'movieId' : Nomor unik yang merupakan identifikasi untuk masing-masing film dalam dataset.
+  - 'tag' : Kata kunci atau tag yang diberikan oleh pengguna untuk suatu film.
+
+ ### Menggabungkan tabel
+
+ 
+
+ ### Exploratory Data Analysis
 
 
 ## Data Preparation
