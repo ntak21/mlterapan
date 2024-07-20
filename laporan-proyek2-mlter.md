@@ -145,12 +145,27 @@ Beberapa parameter yang digunakan:
 Hasil Top 10 Recommendations:
 ![image](https://github.com/user-attachments/assets/8b98d3fd-a3ec-4878-8061-f7e35b6129a5)
 
+## Evaluation
+
+Pada tahap evaluasi digunakan parameter precision and recall untuk mengevaluasi hasil model Content Based Filtering, dan juga RMSE dan MAE untuk menganalisis performa model.
+- Precision : Mengukur proporsi item yang direkomendasikan yang benar-benar relevan dengan preferensi pengguna.
+  
+$$
+\text{Precision} = \frac{\text{Jumlah item relevan yang direkomendasikan}}{\text{Jumlah total item yang direkomendasikan}}
+$$
+
+
+- Recall: Mengukur proporsi item yang relevan yang berhasil direkomendasikan dari total item yang relevan.
 
   
-## Evaluation
-Pada tahap evaluasi digunakan parameter RMSE dan MAE untuk menganalisis performa model.
+$$
+\text{Precision} = \frac{\text{Jumlah item relevan yang direkomendasikan}}{\text{Jumlah total item yang relevan}}
+$$
+
+Nilai precision dan recall yang dihasilkan pada model content based filtering pada kasus ini adalah 0.2 dan 0.04 dimana nilai tersebut masih relatif kecil. Hal ini mungkin disebabkan oleh keterbatasan fitur yang digunakan yaitu genre (dalam dataset tidak tersedia attribut lain seperti actor, director, atau description).
+
 - RMSE (Root Mean Squared Error): Mengukur kesalahan rata-rata kuadrat prediksi model. RMSE memberikan penekanan lebih besar pada kesalahan yang lebih besar dan lebih sensitif terhadap outlier.
-- MAE (Mean Absolute Error): Mengukur kesalahan rata-rata absolut dari prediksi model. MAE memberikan gambaran umum tentang seberapa akurat model dalam hal kesalahan rata-rata
+- MAE (Mean Absolute Error): Mengukur kesalahan rata-rata absolut dari prediksi model. MAE memberikan gambaran umum tentang seberapa akurat model dalam hal kesalahan rata-rata.
 
 ![image](https://github.com/user-attachments/assets/0cdf9e29-e9f5-40e5-8fd5-99835a46ca53)
 
