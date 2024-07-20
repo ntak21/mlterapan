@@ -152,7 +152,7 @@ Pada tahap evaluasi digunakan parameter RMSE dan MAE untuk menganalisis performa
 - RMSE (Root Mean Squared Error): Mengukur kesalahan rata-rata kuadrat prediksi model. RMSE memberikan penekanan lebih besar pada kesalahan yang lebih besar dan lebih sensitif terhadap outlier.
 - MAE (Mean Absolute Error): Mengukur kesalahan rata-rata absolut dari prediksi model. MAE memberikan gambaran umum tentang seberapa akurat model dalam hal kesalahan rata-rata
 
-![image](https://github.com/user-attachments/assets/f51457cc-529e-41f8-ae00-f606fcd7177c)
+![image](https://github.com/user-attachments/assets/0cdf9e29-e9f5-40e5-8fd5-99835a46ca53)
 
 
 Berdasarkan hasil evaluasi model, Collaborative Filtering menunjukkan performa yang lebih baik dibandingkan dengan Content-Based Filtering berdasarkan kedua metrik evaluasi, yaitu RMSE dan MAE. Model Collaborative Filtering memiliki kesalahan prediksi yang lebih kecil, baik dalam hal kuadrat kesalahan (RMSE) maupun rata-rata kesalahan absolut (MAE). Hal ini mengindikasikan bahwa Collaborative Filtering lebih akurat dalam memberikan rekomendasi film yang sesuai dengan preferensi pengguna.
