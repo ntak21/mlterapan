@@ -19,8 +19,8 @@ Referensi: [How Netflix’s Recommendations System Works](https://help.netflix.c
   - Bagaimana membuat sistem rekomendasi film berdasarkan rating dan data pengguna lain yang memiliki minat serupa?
 
 - **Goals**
-  - Membuat sistem rekomendasi film berdasarkan data riwayat preferensi pengguna itu sendiri?
-  - Membuat sistem rekomendasi film berdasarkan rating dan data pengguna lain yang memiliki minat serupa?
+  - Membuat sistem rekomendasi film berdasarkan data riwayat preferensi pengguna itu sendiri.
+  - Membuat sistem rekomendasi film berdasarkan rating dan data pengguna lain yang memiliki minat serupa.
 
 - **Solution Statement**
 
@@ -93,6 +93,13 @@ Untuk menangani nilai yang hilang dalam dataset:
 TF-IDF (Term Frequency-Inverse Document Frequency) adalah teknik yang digunakan untuk mengubah teks menjadi representasi numerik yang dapat digunakan dalam model pembelajaran mesin. Tujuan utamanya adalah untuk menilai seberapa penting sebuah kata dalam dokumen relatif terhadap seluruh koleksi dokumen.
 
 Untuk model content-based filtering yang akan digunakan berikutnya, TF-IDF berfungsi merepresentasikan konten item (film) berdasarkan fitur teks seperti genre. 
+
+Parameter yang digunakan:
+- stop_words='english':
+  Parameter ini menginstruksikan TfidfVectorizer untuk menghapus stop words bahasa     Inggris dari teks. Stop words adalah kata-kata umum seperti "the", "and", "is", yang biasanya tidak membawa informasi penting untuk tujuan analisis teks. Menghilangkan stop words dapat meningkatkan kualitas fitur yang dihasilkan karena kata-kata umum ini tidak memberikan banyak informasi tentang konten teks.
+- fillna('') pada kolom genres:
+  Fungsi fillna('') digunakan untuk mengganti nilai yang hilang (NaN) dalam kolom genres dengan string kosong ('').
+
 
 ###  Train Test Split
 Train-test split adalah langkah penting dalam proses pengembangan model yang membagi dataset menjadi dua subset: satu untuk melatih model (train set) dan satu untuk menguji model (test set). Pada kasus ini, kita akan menggunakan proporsi pembagian data latih dan data uji sebesar 80:20 dengan fungsi train_test_split dari sklearn.
