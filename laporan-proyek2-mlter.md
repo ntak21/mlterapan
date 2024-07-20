@@ -92,14 +92,15 @@ Untuk menangani nilai yang hilang dalam dataset:
 
 TF-IDF (Term Frequency-Inverse Document Frequency) adalah teknik yang digunakan untuk mengubah teks menjadi representasi numerik yang dapat digunakan dalam model pembelajaran mesin. Tujuan utamanya adalah untuk menilai seberapa penting sebuah kata dalam dokumen relatif terhadap seluruh koleksi dokumen.
 
-Untuk model content-based filtering yang akan digunakan berikutnya, TF-IDF berfungsi merepresentasikan konten item (film) berdasarkan fitur teks seperti genre. 
+Untuk model content-based filtering yang akan digunakan berikutnya, TF-IDF berfungsi merepresentasikan konten item (film) berdasarkan fitur teks seperti genre dan tags.
+
+Selanjutnya digunakan juga AnnoyIndex untuk melakukan pencarian terdekat berdasarkan representasi TF-IDF dari film untuk menemukan film yang mirip. Annoy dapat mencari nearest neighbors dengan cepat di ruang fitur berdimensi tinggi menggunakan jarak sudut (cosine similarity).
 
 Parameter yang digunakan:
 - stop_words='english':
   Parameter ini menginstruksikan TfidfVectorizer untuk menghapus stop words bahasa     Inggris dari teks. Stop words adalah kata-kata umum seperti "the", "and", "is", yang biasanya tidak membawa informasi penting untuk tujuan analisis teks. Menghilangkan stop words dapat meningkatkan kualitas fitur yang dihasilkan karena kata-kata umum ini tidak memberikan banyak informasi tentang konten teks.
-- fillna('') pada kolom genres:
-  Fungsi fillna('') digunakan untuk mengganti nilai yang hilang (NaN) dalam kolom genres dengan string kosong ('').
-
+- f: Menentukan jumlah dimensi atau fitur yang digunakan dalam indeks Annoy.
+- 'angular': Metrik jarak yang digunakan untuk mengukur kesamaan antara item dalam indeks. 'angular' mengacu pada jarak sudut atau cosine similarity.
 
 ###  Train Test Split
 Train-test split adalah langkah penting dalam proses pengembangan model yang membagi dataset menjadi dua subset: satu untuk melatih model (train set) dan satu untuk menguji model (test set). Pada kasus ini, kita akan menggunakan proporsi pembagian data latih dan data uji sebesar 80:20 dengan fungsi train_test_split dari sklearn.
@@ -116,14 +117,13 @@ Content-Based Filtering adalah teknik dalam sistem rekomendasi yang memanfaatkan
 
 Beberapa parameter yang digunakan:
 - title: Judul film yang dijadikan acuan untuk mendapatkan rekomendasi.
-- cosine_sim: Matriks kesamaan cosine antara film yang digunakan untuk mencari film yang paling mirip.
+- k: Jumlah rekomendasi teratas yang ingin diambil.
 - idx: Indeks film yang relevan berdasarkan judul.
-- sim_scores: Daftar tuple yang berisi indeks film dan skor kesamaan. Diurutkan - berdasarkan skor kesamaan untuk mendapatkan film yang paling mirip.
-- movie_indices: Daftar indeks film yang paling mirip untuk rekomendasi.
-- movies.iloc[movie_indices]: Mengambil detail film yang relevan berdasarkan indeks.
-
+- neighbors = index.get_nns_by_item(idx, k): Menggunakan indeks Annoy untuk mendapatkan k item terdekat dari indeks film.
+  
 Hasil Top 10 Recommendation:
-![image](https://github.com/user-attachments/assets/fdb979b9-1df6-4b45-8b82-d24a50d5a705)
+![image](https://github.com/user-attachments/assets/8211fd44-edcb-439f-a385-85a3f0d1b086)
+
 
   
 ### Collaborative Filtering
@@ -143,7 +143,8 @@ Beberapa parameter yang digunakan:
 - SVD(): SVD atau Singular Value Decomposition merupakan algoritma rekomendasi yang populer dalam collaborative filtering. SVD membagi matriks rating pengguna-item menjadi beberapa matriks yang lebih kecil untuk memprediksi rating yang hilang.
 
 Hasil Top 10 Recommendations:
-![image](https://github.com/user-attachments/assets/8b98d3fd-a3ec-4878-8061-f7e35b6129a5)
+![image](https://github.com/user-attachments/assets/a64f815d-50cd-4e9d-aa95-b1fa3bb0fbf0)
+
 
 ## Evaluation
 
@@ -162,13 +163,15 @@ $$
 \text{Precision} = \frac{\text{Jumlah item relevan yang direkomendasikan}}{\text{Jumlah total item yang relevan}}
 $$
 
-Nilai precision dan recall yang dihasilkan pada model content based filtering pada kasus ini adalah 0.2 dan 0.04 dimana nilai tersebut masih relatif kecil. Hal ini mungkin disebabkan oleh keterbatasan fitur yang digunakan yaitu genre (dalam dataset tidak tersedia attribut lain seperti actor, director, atau description).
+![image](https://github.com/user-attachments/assets/4fe156c7-cdaf-4914-b5ad-223d92bf366d)
+
+Nilai precision yang dihasilkan pada model content based filtering pada kasus ini adalah 0.17, dimana nilai tersebut masih relatif kecil. Hal ini mungkin disebabkan oleh keterbatasan fitur yang digunakan yaitu genre dan tag (dalam dataset tidak tersedia attribut lain seperti actor, director, atau description). Sedangkan nilai recall yang didapatkan adalah 1.00, menunjukkan bahwa sistem berhasil menemukan semua film yang relevan dalam daftar rekomendasi teratas yang seharusnya dimiliki oleh pengguna.
 
 - RMSE (Root Mean Squared Error): Mengukur kesalahan rata-rata kuadrat prediksi model. RMSE memberikan penekanan lebih besar pada kesalahan yang lebih besar dan lebih sensitif terhadap outlier.
 - MAE (Mean Absolute Error): Mengukur kesalahan rata-rata absolut dari prediksi model. MAE memberikan gambaran umum tentang seberapa akurat model dalam hal kesalahan rata-rata.
+- 
+![image](https://github.com/user-attachments/assets/27497b32-ac36-44a3-8ccb-e85c3630b816)
 
-![image](https://github.com/user-attachments/assets/0cdf9e29-e9f5-40e5-8fd5-99835a46ca53)
 
-
-Berdasarkan hasil evaluasi model, Collaborative Filtering menunjukkan performa yang lebih baik dibandingkan dengan Content-Based Filtering berdasarkan kedua metrik evaluasi, yaitu RMSE dan MAE. Model Collaborative Filtering memiliki kesalahan prediksi yang lebih kecil, baik dalam hal kuadrat kesalahan (RMSE) maupun rata-rata kesalahan absolut (MAE). Hal ini mengindikasikan bahwa Collaborative Filtering lebih akurat dalam memberikan rekomendasi film yang sesuai dengan preferensi pengguna.
+Berdasarkan hasil evaluasi model, Collaborative Filtering menunjukkan performa yang cukup baik yaitu dengan RMSE 0.477569 dan MAE 0.371782.
 
